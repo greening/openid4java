@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openid4java</groupId>
   <artifactId>openid4java</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>OpenID4Java</name>
   <description>
@@ -22,38 +22,17 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <jetty.version>6.0.2</jetty.version>
-    <test.data.src>${basedir}/test/yadisdata</test.data.src>
-    <test.data.build>${basedir}/target/test-data</test.data.build>
   </properties>
 
   <build>
-    <sourceDirectory>${basedir}/src</sourceDirectory>
-    <resources>
-      <resource>
-        <directory>${basedir}/src</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xsd</include>
-        </includes>
-      </resource>
-    </resources>
-    <testSourceDirectory>${basedir}/test/src</testSourceDirectory>
     <testResources>
       <testResource>
-        <directory>${basedir}/test/src</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.html</include>
-        </includes>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
       </testResource>
     </testResources>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.7</version>
-        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
@@ -147,7 +126,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>properties-maven-plugin</artifactId>
-          <version>1.0-alpha-2</version>
+          <version>1.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -234,40 +213,12 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>process-test-resources</phase>
-            <configuration>
-              <tasks unless="maven.test.skip">
-                <echo message="To skip me, just call mvn -Dmaven.test.skip=true" />
-                <delete dir="${test.data.build}" />
-                <copy todir="${test.data.build}">
-                  <fileset dir="${test.data.src}" />
-                </copy>
-                <replace token="SERVLET_PORT" value="${test.servlet.port}" dir="${test.data.build}" />
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <excludes>
-            <exclude>**/xri/**</exclude>
-            <exclude>**/infocard/**</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <systemProperties>
             <property>
               <name>YADIS_TEST_DATA</name>
-              <value>${test.data.build}</value>
+              <value>${project.build.testOutputDirectory}</value>
             </property>
             <property>
               <name>SERVLET_PORT</name>

@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="X-XRDS-Location" content="http://localhost:SERVLET_PORT/?headers=simplexrds&xrds=simplexrds">
+<meta http-equiv="X-XRDS-Location" content="http://localhost:${test.servlet.port}/?headers=simplexrds&xrds=simplexrds">
 <title>Joe Schmoe's Homepage</title>
 </head>
 <head>some other head..</head>

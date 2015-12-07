@@ -1,0 +1,3 @@
+status=302
+Location=http://localhost:${test.servlet.port}/?html=simplehtml
+Content-Type=text/plain
