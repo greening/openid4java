@@ -219,8 +219,8 @@
             </classpath>
         </javac>
         <copy todir="${classes.test}">
-            <fileset dir="${test.src}" includes="**/*.properties"/>
-            <fileset dir="${test.src}" includes="**/*.html"/>
+            <fileset dir="${test.data}" includes="**/*.properties"/>
+            <fileset dir="${test.data}" includes="**/*.html"/>
         </copy>
     </target>
 
@@ -235,9 +235,9 @@
         <delete dir="${build}/test/junit/xml"/>
         <mkdir dir="${build}/test/junit/xml"/>
         <junit printsummary="yes" fork="no" failureproperty="test.failed">
-            <sysproperty key="YADIS_TEST_DATA" value="${build}/test/data"/>
+            <sysproperty key="YADIS_TEST_DATA" value="${build}/yadisdata"/>
             <sysproperty key="SERVLET_PORT" value="${test.servlet.port}"/>
-            <sysproperty key="TEST_DATA" value="${test.src}/org/openid4java/"/>
+            <sysproperty key="TEST_DATA" value="${test.data}/org/openid4java/"/>
             <classpath>
                 <pathelement location="${classes.test}"/>
                 <pathelement location="${classes}"/>

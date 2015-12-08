@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openid4java</groupId>
   <artifactId>openid4java</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>0.9.3</version>
   <packaging>jar</packaging>
   <name>OpenID4Java</name>
   <description>
@@ -22,6 +22,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <jetty.version>6.0.2</jetty.version>
+    <test.yadisdata.filtered>${project.build.directory}/yadisdata</test.yadisdata.filtered>
   </properties>
 
   <build>
@@ -30,6 +31,11 @@
         <directory>src/test/resources</directory>
         <filtering>true</filtering>
       </testResource>
+      <testResource>
+        <directory>src/test/yadisdata</directory>
+        <filtering>true</filtering>
+        <targetPath>${test.yadisdata.filtered}</targetPath>
+        </testResource>
     </testResources>
     <pluginManagement>
       <plugins>
@@ -218,7 +224,7 @@
           <systemProperties>
             <property>
               <name>YADIS_TEST_DATA</name>
-              <value>${project.build.testOutputDirectory}</value>
+              <value>${test.yadisdata.filtered}</value>
             </property>
             <property>
               <name>SERVLET_PORT</name>
@@ -226,7 +232,7 @@
             </property>
             <property>
               <name>TEST_DATA</name>
-              <value>${basedir}/test/src/org/openid4java/</value>
+              <value>${basedir}/src/test/resources/org/openid4java/</value>
             </property>
           </systemProperties>
         </configuration>
@@ -392,7 +398,6 @@
       <snapshots />
     </repository>
   </repositories>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -476,6 +481,14 @@
           </exclusion>
         </exclusions>
       </dependency>
+      
+      <!--  OpenXRI -->            
+      <dependency>
+        <groupId>org.openxri</groupId>
+        <artifactId>openxri-client</artifactId>
+        <version>1.2.0</version>
+      </dependency>
+      
 
       <!-- Discovery -->
       <dependency>
