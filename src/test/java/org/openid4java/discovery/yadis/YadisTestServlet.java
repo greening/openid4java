@@ -135,6 +135,7 @@ public class YadisTestServlet extends HttpServlet
                 }
             }
         }
+        input.close();
     }
 
 
